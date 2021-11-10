@@ -9,10 +9,10 @@ import java.time.Duration;
 public class Movie {
     private String title;
     private String description;
-    private Duration duration;
-    private BitMap image;
+    private int duration; //change to Duration class later here and constructor
+    private String image; //change to BitMap class later here and constructor
 
-    public Movie(String title, String description, java.time.Duration duration, BitMap image) {
+    public Movie(String title, String description, int duration, String image) {
         this.title = title;
         this.description = description;
         this.duration = duration;
