@@ -2,8 +2,10 @@ package cinemamock.model.entities;
 
 import sun.jvm.hotspot.utilities.BitMap;
 
+import javax.persistence.Entity;
 import java.time.Duration;
 
+@Entity
 public class Movie {
     private String title;
     private String description;
