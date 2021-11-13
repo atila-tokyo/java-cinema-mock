@@ -1,12 +1,16 @@
 package cinemamock.model.entities;
 
-import sun.jvm.hotspot.utilities.BitMap;
-
 import javax.persistence.Entity;
-import java.time.Duration;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Movie {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String title;
     private String description;
     private int duration; //change to Duration class later here and constructor
@@ -35,19 +39,19 @@ public class Movie {
         this.description = description;
     }
 
-    public Duration getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public BitMap getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(BitMap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

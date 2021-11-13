@@ -7,6 +7,7 @@ import cinemamock.model.entities.User;
 import cinemamock.model.repository.UserRepository;
 import cinemamock.service.LoginService;
 
+@Service
 public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserRepository userRepository;

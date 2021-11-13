@@ -1,15 +1,22 @@
 package cinemamock.service;
 
 import cinemamock.model.entities.Movie;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MovieService {
+    public MovieService() {
+    }
+
     public List<Movie> getMovie() {
-        return ListOf( // Method seems to not exist in JAVA EE8
+
+        private final MovieRepository movieRepository;
+
+        List<Movie> movies = new ArrayList<>();
+        movies.add(
                 new Movie(
                         "Forest Gump",
                         "Run Forst",
@@ -17,5 +24,6 @@ public class MovieService {
                         "Movie poster"
                 )
         );
+        return movies;
     }
 }
