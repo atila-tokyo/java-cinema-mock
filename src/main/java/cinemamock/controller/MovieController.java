@@ -1,7 +1,6 @@
 package cinemamock.controller;
 
 import cinemamock.model.entities.Movie;
-import cinemamock.model.repository.MovieRepository;
 import cinemamock.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +11,11 @@ import java.util.List;
 @RequestMapping(path = "api/movie")
 public class MovieController {
 
-    private final MovieService movieService = null;
+    private final MovieService movieService;
 
     @Autowired
     public MovieController(MovieService movieService) {
-        this.movieService = new MovieService;
+        this.movieService = movieService;
     }
 
     @GetMapping
@@ -27,5 +26,10 @@ public class MovieController {
     @PostMapping
     public void registerNewMovie(@RequestBody Movie movie) {
         movieService.addNewMovie(movie);
+    }
+
+    @DeleteMapping(path="{movieId}")
+    public void deleteStudent(@PathVariable("movieId") Long studentId) {
+        movieService.deleteMovie(studentId);
     }
 }

@@ -29,4 +29,12 @@ public class MovieService {
         }
         movieRepository.save(movie);
     }
+
+    public void deleteMovie(Long movieId) {
+        boolean exists = movieRepository.existsById(movieId);
+        if (!exists) {
+            throw new IllegalStateException("Movie is not registered");
+        }
+        movieRepository.deleteById(movieId);
+    }
 }

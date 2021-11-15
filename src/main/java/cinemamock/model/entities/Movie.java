@@ -33,6 +33,9 @@ public class Movie {
     @Column(name = "image")
     private String image; //change to BitMap class later here and constructor
 
+    public Movie() {
+    }
+
     public Movie(String title, String description, int duration, String image) {
         this.title = title;
         this.description = description;
