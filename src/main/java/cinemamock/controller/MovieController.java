@@ -32,4 +32,15 @@ public class MovieController {
     public void deleteStudent(@PathVariable("movieId") Long studentId) {
         movieService.deleteMovie(studentId);
     }
+
+    @PutMapping(path="{movieId}")
+    public void updateMovie(
+            @PathVariable("movieId") Long movieId,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) int duration,
+            @RequestParam(required = false) String image) {
+        movieService.updateMovie(movieId, title, description, duration, image);
+    }
+
 }

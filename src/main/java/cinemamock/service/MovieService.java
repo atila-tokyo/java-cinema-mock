@@ -5,7 +5,9 @@ import cinemamock.model.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -36,5 +38,29 @@ public class MovieService {
             throw new IllegalStateException("Movie is not registered");
         }
         movieRepository.deleteById(movieId);
+    }
+
+    @Transactional
+    public void updateMovie(Long movieId, String title, String description, int duration, String image) {
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Referred movie is not registered"
+                ));
+
+        if (title != null && title.length() > 0 && !Objects.equals(movie.getTitle(), title)) {
+            movie.setTitle(title);
+        }
+
+        if (description != null && description.length() > 0) {
+            movie.setDescription(description);
+        }
+
+        if (duration > 0) {
+            movie.setDuration(duration);
+        }
+
+        if (image != null && image.length() > 0) {
+            movie.setImage(image);
+        }
     }
 }
