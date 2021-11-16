@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Service
+@Service // A more semantic annotation to work on dependency injection
 public class MovieService {
 
     private final MovieRepository movieRepository;
@@ -27,7 +27,7 @@ public class MovieService {
     public void addNewMovie(Movie movie) {
         Optional<Movie> movieOptional = movieRepository.findMovieByTitle(movie.getTitle());
         if (movieOptional.isPresent()) {
-            throw new IllegalStateException("Movie already registerd");
+            throw new IllegalStateException("Movie already registered");
         }
         movieRepository.save(movie);
     }
@@ -48,6 +48,10 @@ public class MovieService {
                 ));
 
         if (title != null && title.length() > 0 && !Objects.equals(movie.getTitle(), title)) {
+            Optional <Movie> movieOptional = movieRepository.findMovieByTitle(title);
+            if (movieOptional.isPresent()) {
+                throw new IllegalStateException("Title already registered");
+            }
             movie.setTitle(title);
         }
 
