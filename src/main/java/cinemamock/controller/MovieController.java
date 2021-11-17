@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/movie")
+@RequestMapping(path = "api/v1")
 public class MovieController {
 
     private final MovieService movieService;
@@ -18,9 +18,9 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping
-    List<Movie> getMovie() {
-        return movieService.getMovie();
+    @GetMapping(value = "movies")
+    List<Movie> getMovies() {
+        return movieService.getMovies();
     }
 
     @PostMapping

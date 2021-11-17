@@ -14,13 +14,13 @@ import java.util.Optional;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+
     @Autowired
     public MovieService(MovieRepository movieRepository) {
-
         this.movieRepository = movieRepository;
     }
 
-    public List<Movie> getMovie() {
+    public List<Movie> getMovies() {
         return movieRepository.findAll();
     }
 

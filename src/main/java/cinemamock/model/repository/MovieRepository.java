@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-
     Optional<Movie> findMovieByTitle(String title);
-    /* line above is the equivalent to the query in the line below
-    @Query("SELECT m FROM Movie m WHERE m.title = ?1");
+
+    /* line above is the equivalent to the query
+       @Query("SELECT m FROM Movie m WHERE m.title = ?1");
     */
 }
