@@ -35,4 +35,14 @@ public class ApiException {
     public ZonedDateTime getZonedDateTime() {
         return zonedDateTime;
     }
+
+    @Override
+    public String toString() {
+        return "ApiException{" +
+                "message='" + message + '\'' +
+                ", throwable=" + throwable +
+                ", httpStatus=" + httpStatus +
+                ", zonedDateTime=" + zonedDateTime +
+                '}';
+    }
 }
