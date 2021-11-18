@@ -29,8 +29,8 @@ public class MovieController {
     }
 
     @DeleteMapping(path="{movieId}")
-    public void deleteStudent(@PathVariable("movieId") Long studentId) {
-        movieService.deleteMovie(studentId);
+    public void deleteMovie(@PathVariable("movieId") Long movieId) {
+        movieService.deleteMovie(movieId);
     }
 
     @PutMapping(path="{movieId}")
