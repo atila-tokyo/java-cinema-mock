@@ -5,6 +5,8 @@ import cinemamock.model.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +34,16 @@ public class SessionService {
     }
 
     public void addNewSession(Session session) {
+    }
+
+    public void updateSession(
+                    Long movieId,
+                    LocalDate date,
+                    LocalTime startTime,
+                    LocalTime finishTime,
+                    double ticketPrice,
+                    String typeAnimation,
+                    String typeAudio
+                ) {
     }
 }

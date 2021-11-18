@@ -3,9 +3,8 @@ package cinemamock.model.entities;
 import cinemamock.model.repository.RoomRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+
 public class RoomConfig {
     private Object List;
 
@@ -23,6 +22,17 @@ public class RoomConfig {
                     50
             );
             roomRepository.save(classics);
+
+            Room thriller = new Room(
+                    "Thriller",
+                    100
+            );
+            roomRepository.save(thriller);
+            Room threeD = new Room(
+                    "3D",
+                120
+            );
+            roomRepository.save(threeD);
         };
 
     }

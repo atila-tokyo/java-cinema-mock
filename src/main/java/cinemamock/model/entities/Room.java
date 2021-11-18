@@ -1,10 +1,33 @@
 package cinemamock.model.entities;
 
-public class Room {
-    String name;
-    Integer seats;
+import javax.persistence.*;
 
-    public Room(String name, Integer seats) {
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Entity(name = "Room")
+public class Room {
+    @Id
+    @SequenceGenerator(
+            name = "room_sequence",
+            sequenceName = "room_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "room_sequence"
+    )
+
+    @Column(name = "id", updatable = false)
+    private long id;
+
+    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
+    private String name;
+
+    @Column(name = "seats", nullable = false)
+    private int seats;
+
+
+    public Room(String name, int seats) {
         this.name = name;
         this.seats = seats;
     }

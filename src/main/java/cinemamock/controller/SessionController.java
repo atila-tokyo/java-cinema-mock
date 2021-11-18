@@ -5,6 +5,8 @@ import cinemamock.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -18,29 +20,40 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @GetMapping(value = "movies")
+    @GetMapping(value = "sessions")
     List<Session> getSessions() {
         return sessionService.getSessions();
     }
 
-    @PostMapping
+    @PostMapping(value = "new-session")
     public void registerNewSession(@RequestBody Session session) {
         sessionService.addNewSession(session);
     }
 
-    @DeleteMapping(path = "{movieId}")
-    public void deleteSession(@PathVariable("movieId") Long sessionId) {
+    @DeleteMapping(path = "{sessionId}")
+    public void deleteSession(@PathVariable("sessionId") Long sessionId) {
         sessionService.deleteSession(sessionId);
     }
 
-    @PutMapping(path = "{movieId}")
-    public void updateMovie(
-            @PathVariable("movieId") Long movieId,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) int duration,
-            @RequestParam(required = false) String image) {
-        sessionService.updateSession(movieId, title, description, duration, image);
+    @PutMapping(path = "{sessionId}")
+    public void updateSession(
+            @PathVariable("sessionId") Long movieId,
+            @RequestParam(required = false) LocalDate date,
+            @RequestParam(required = false) LocalTime startTime,
+            @RequestParam(required = false) LocalTime finishTime,
+            @RequestParam(required = false) double ticketPrice,
+            @RequestParam(required = false) String typeAnimation,
+            @RequestParam(required = false) String typeAudio
+            ) {
+        sessionService.updateSession(
+                            movieId,
+                            date,
+                            startTime,
+                            finishTime,
+                            ticketPrice,
+                            typeAnimation,
+                            typeAudio
+                            );
     }
 }
 
