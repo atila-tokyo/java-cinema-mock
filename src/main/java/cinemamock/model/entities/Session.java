@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity(name = "session")
+@Entity(name = "Session")
 public class Session {
 
     @Id
@@ -41,7 +41,9 @@ public class Session {
     @Column(name = "typeAudio", nullable = false, columnDefinition = "VARCHAR")
     private String typeAudio;
 
-
+    @ManyToOne
+    @JoinColumn(name= "movie_id")
+    private Movie movie;
 
     public Session(
                 LocalDate date,
@@ -105,6 +107,14 @@ public class Session {
 
     public void setTypeAudio(String typeAudio) {
         this.typeAudio = typeAudio;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     @Override

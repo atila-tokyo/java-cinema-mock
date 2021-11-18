@@ -6,6 +6,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Room")
 public class Room {
+    public Room() {
+    }
+
     @Id
     @SequenceGenerator(
             name = "room_sequence",
@@ -44,7 +47,7 @@ public class Room {
         return seats;
     }
 
-    public void setSeats(Integer seats) {
+    public void setSeats(int seats) {
         this.seats = seats;
     }
 

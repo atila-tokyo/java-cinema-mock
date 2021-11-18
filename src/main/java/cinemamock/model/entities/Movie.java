@@ -2,10 +2,13 @@ package cinemamock.model.entities;
 
 import javax.persistence.*;
 
+import java.util.Set;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Movie")
 public class Movie {
+
 
     @Id
     @SequenceGenerator(
@@ -33,6 +36,12 @@ public class Movie {
     @Column(name = "image")
     private String image; //change to BitMap class later here and constructor
 
+
+    @OneToMany(mappedBy = "movie")
+    private Set<Session> session;
+
+    public Movie() {
+    }
 
     public Movie(String title, String description, int duration, String image) {
         this.title = title;
@@ -79,6 +88,14 @@ public class Movie {
     public void setImage(String image) {
 
         this.image = image;
+    }
+
+    public Set<Session> getSession() {
+        return session;
+    }
+
+    public void setSession(Set<Session> session) {
+        this.session = session;
     }
 
     @Override
