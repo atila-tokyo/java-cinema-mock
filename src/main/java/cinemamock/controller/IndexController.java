@@ -9,14 +9,20 @@ import java.util.Map;
 public class IndexController {
     @RequestMapping("/")
     public String home(Map<String, Object> model) {
-        model.put("message", "Movie Manager");
+        model.put("message", "Login");
         return "login";
     }
 
     @RequestMapping("/movie")
-    public String next(Map<String, Object> model) {
-        model.put("message", "You are in new page !!");
+    public String movie(Map<String, Object> model) {
+        model.put("message", "You are in movies page");
         return "movieMgmt";
+    }
+
+    @RequestMapping("/room")
+    public String rooms(Map<String, Object> model) {
+        model.put("message", "You are in rooms page");
+        return "rooms";
     }
 
 }
