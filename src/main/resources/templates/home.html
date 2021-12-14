@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cinema Mock</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<p th:text="'Hello, ' + ${name} + '!'" />
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
