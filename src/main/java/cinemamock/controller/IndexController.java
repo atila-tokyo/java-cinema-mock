@@ -1,6 +1,6 @@
 package cinemamock.controller;
 
-import cinemamock.service.LoginService;
+import cinemamock.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import java.util.Map;
 public class IndexController {
 
     @Autowired
-    private LoginService service;
+    private UserService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Map<String, Object> model) {
@@ -20,7 +20,7 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "/movie", method = RequestMethod.GET)
+    @RequestMapping(value = "/moviemgmt", method = RequestMethod.GET)
     public String movie(Map<String, Object> model) {
         model.put("message", "You are in movies page");
         return "movieMgmt";

@@ -13,10 +13,10 @@
             <main class="mt-5 pt-5">
                 <div class="row">
                     <div class="col-lg-3 center-block">
-                        <img src="mb-4 mt-5 pt-5" src="../assets/movie.svg" alt="" width="72" height="57">
+                        <img class="mb-4 mt-5 pt-5" src="../assets/movie.svg" alt="" width="72" height="57">
                         <h1 class="h3 mb-3 fw-normal">Please sign-in</h1>
 
-                        <div class="form-floating">
+                        <div class="form-floating mb-4 mt-5 pt-5">
                             <input type="email" class="form-control" width="100" id="floatingInput" placeholder="name@example.com" style="width:450px">
                             <label for="floatingInput">Email Address</label>
                         </div>

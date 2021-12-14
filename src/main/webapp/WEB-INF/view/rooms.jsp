@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,5 +20,13 @@
             </a>
         </div>
     </nav>
+
+    <ol>
+    	<c:forEach var="getRooms" items="${getRooms()}">
+
+    		<li>${getRooms}</li>
+
+    	</c:forEach>
+    </ol>
 </body>
 </html>
