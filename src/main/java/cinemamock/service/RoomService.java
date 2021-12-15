@@ -1,28 +1,20 @@
 package cinemamock.service;
 
 import cinemamock.model.entities.Room;
-import cinemamock.model.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class RoomService {
+public interface RoomService {
 
-    private final RoomRepository roomRepository;
+    List<Room> getRooms();
 
-    @Autowired
-    public RoomService(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
-    }
+    Optional<Room> getRoom(Room room);
 
-    public List<Room> getRooms() {
-        return roomRepository.findAll();
-    }
+    void save(Room room);
 
-    public Optional<Room> getRoom(Room room) {
-        return roomRepository.findRoomByName(room.getName());
-    }
+    Optional<Room> findById(Long id);
+
+    Boolean delete(Long id);
+
 }
