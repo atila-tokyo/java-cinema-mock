@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cinema Mock | Room</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:replace="fragments/header :: header" />
+
+<div class="col-xs-8 col-md-8">
+  <h3>
+    <a href="/room/create" class="btn btn-primary"><i
+            class="fas fa-plus-square"></i> Room</a>
+  </h3>
+  <h2>Rooms</h2>
+  <div align="center" th:if="${message}">
+    <p style="font-size: 20; color: #00FFFF;" th:text="${message}" />
+  </div>
+  <div class="table-responsive">
+    <table class="table" id="room-table">
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Seats</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="room : ${rooms}">
+        <td><a th:text="${room.name}"
+               th:href="@{'/room/' + ${room.id}}"></a></td>
+        <td th:text="${room.seats}"></td>
+        <td><a th:text="Edit"
+               th:href="@{'/room/edit/' + ${room.id}}"></a>
+          <a th:text="Delete"
+             th:href="@{'/room/delete/' + ${room.id}}"></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <div th:replace="fragments/footer :: footer" />
+</body>

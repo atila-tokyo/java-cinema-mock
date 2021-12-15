@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cinema Mock | Session</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:replace="fragments/header :: header" />
+
+<div class="col-xs-8 col-md-8">
+    <h3>
+        <a href="/movie/create" class="btn btn-primary"><i
+                class="fas fa-plus-square"></i> Session</a>
+    </h3>
+    <h2>Sessions</h2>
+    <div class="table-responsive">
+        <table class="table" id="notes-table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Finish Time</th>
+                <th>Price</th>
+                <th>Type Animation</th>
+                <th>Audio</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="session : ${sessions}">
+                <td><a th:text="${session.id}"
+                       th:href="@{'/session/' + ${session.id}}"></a></td>
+                <td th:text="${new java.text.SimpleDateFormat('dd/MM/yyyy').format(session.date)}"></td>
+                <td th:text="${session.startTime}"></td>
+                <td th:text="${session.finishTime}"></td>
+                <td th:text="${session.ticketPrice}"></td>
+                <td th:text="${session.typeAnimation}"></td>
+                <td th:text="${session.typeAudio}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cinema Mock | Movies</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:replace="fragments/header :: header" />
+
+<div class="col-xs-8 col-md-8">
+    <h3>
+        <a href="/movie/create" class="btn btn-primary"><i
+                class="fas fa-plus-square"></i> Movie</a>
+    </h3>
+    <h2>Movies</h2>
+    <div class="table-responsive">
+        <table class="table" id="notes-table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movie : ${movies}">
+                <td><a th:text="${movie.title}"
+                       th:href="@{'/movie/' + ${movie.id}}"></a></td>
+                <td th:text="${movie.duration}"></td>
+                <td
+                        th:text="${movie.image}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <div th:replace="fragments/footer :: footer" />
+</body>
+</html>
