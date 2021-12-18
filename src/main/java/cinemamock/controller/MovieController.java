@@ -3,44 +3,60 @@ package cinemamock.controller;
 import cinemamock.model.entities.Movie;
 import cinemamock.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
-@RequestMapping(path = "api/v1")
+@Controller
 public class MovieController {
 
-    private final MovieService movieService;
-
     @Autowired
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
+    private MovieService movieService;
+
+    @GetMapping(value = "movie")
+    public String getMovies(Model model) {
+        List<Movie> movies = movieService.getMovies();
+        model.addAttribute("movie", movies);
+        return "movie";
     }
 
-    @GetMapping(value = "movies")
-    List<Movie> getMovies() {
-        return movieService.getMovies();
+
+    @PostMapping(value = "movie/create")
+    public String create(Model model) {
+        return "create_movie";
     }
 
-    @PostMapping(value = "movies")
-    public void registerNewMovie(@RequestBody Movie movie) {
-        movieService.addNewMovie(movie);
+    @GetMapping(value = "movie/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Optional<Movie> movie = movieService.findById(id);
+        model.addAttribute("movie", movie.get());
+        return "edit_movie";
     }
 
-    @DeleteMapping(path="movies/{movieId}")
-    public void deleteMovie(@PathVariable("movieId") Long movieId) {
-        movieService.deleteMovie(movieId);
+    @GetMapping(path="movies/movie/{id}")
+    public String delete(@PathVariable Long id, Model model) {
+        Boolean isDelete = movieService.delete(id);
+        if(isDelete) {
+            model.addAttribute("message", "Movie successfully deleted");
+        } else {
+            model.addAttribute("message", "Movie not deleted");
+        }
+        List<Movie> movies = movieService.getMovies();
+        model.addAttribute("movies", movies);
+        return "movie";
     }
 
-    @PutMapping(path="movies/{movieId}")
-    public void updateMovie(
-            @PathVariable("movieId") Long movieId,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) int duration,
-            @RequestParam(required = false) String image) {
-        movieService.updateMovie(movieId, title, description, duration, image);
+    @PostMapping(value = "movie")
+    public String save(Movie movie, Model model) {
+        if(movie != null) {
+            movieService.save(movie);
+        }
+        model.addAttribute("message", "Movie successfully added");
+        List<Movie> movies = movieService.getMovies();
+        model.addAttribute("movies", movies);
+        return "movie";
     }
-
 }

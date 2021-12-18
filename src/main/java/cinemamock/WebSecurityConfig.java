@@ -1,16 +1,20 @@
-import cinemamock.model.entities.User;
-import cinemamock.model.repository.UserRepository;
-import cinemamock.service.impl.CustomUserDetailService;
+package cinemamock;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import cinemamock.model.entities.User;
+import cinemamock.model.repository.UserRepository;
+import cinemamock.service.impl.CustomUserDetailService;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailService userDetailsService;
 
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptPasswordEncoder);
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -30,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("login?error=true")
+                .loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -38,28 +50,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
-
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/assets/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/assets/**");
     }
 
     @Bean
-    BCryptPasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder(); }
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     CommandLineRunner commandLineRunnerUser(UserRepository userRepository) {
         return args -> {
             User user = new User();
-            user.setEmail("hitchhiker@gmail.com");
-            user.setFirstName("Arthur");
-            user.setLastName("Dent");
-            user.setPassword(bCryptPasswordEncoder.encode("answer42"));
+            user.setEmail("jhon@example.com");
+            user.setFirstName("Jhon");
+            user.setLastName("Whick");
+            user.setPassword(bCryptPasswordEncoder.encode("admin"));
             userRepository.save(user);
         };
     }
+
 }
