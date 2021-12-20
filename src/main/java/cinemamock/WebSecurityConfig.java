@@ -1,5 +1,8 @@
 package cinemamock;
 
+import cinemamock.model.entities.User;
+import cinemamock.model.repository.UserRepository;
+import cinemamock.service.impl.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -11,10 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import cinemamock.model.entities.User;
-import cinemamock.model.repository.UserRepository;
-import cinemamock.service.impl.CustomUserDetailService;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +26,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailService userDetailsService;
 
+
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedMethods("*").allowedOrigins("*");
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -68,9 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CommandLineRunner commandLineRunnerUser(UserRepository userRepository) {
         return args -> {
             User user = new User();
-            user.setEmail("jhon@example.com");
-            user.setFirstName("Jhon");
-            user.setLastName("Whick");
+            user.setEmail("hitchhiker@gmail.com");
+            user.setFirstName("Arthur");
+            user.setLastName("Dent");
             user.setPassword(bCryptPasswordEncoder.encode("admin"));
             userRepository.save(user);
         };
